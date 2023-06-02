@@ -19,12 +19,12 @@ namespace Identity.Api.Controllers
 
         [Authorize(Roles = Roles.Admin)]
         [HttpPost("impersonate")]
-        //public async Task<IActionResult> ImpersonateAsync([FromBody] ImpersonateUserQuery impersonateQuery)
-        //=> Ok(await Mediator.Send(impersonateQuery));
+        public async Task<IActionResult> ImpersonateAsync([FromBody] ImpersonateUserQuery impersonateQuery)
+        => Ok(await Mediator.Send(impersonateQuery));
+        [AllowAnonymous]
         [HttpPost("register")]
-        public Task<string> InsertUser([FromBody] InsertUserCommand command)
-        {
-            return Mediator.Send(command);
-        }
+        public async Task<IActionResult> InsertUser([FromBody] InsertUserCommand command)
+        => Ok(await Mediator.Send(command));
+        
     }
 }
