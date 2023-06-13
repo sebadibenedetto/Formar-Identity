@@ -5,6 +5,7 @@ using Identity.Data.Ef;
 using Identity.Entities;
 using Identity.Infrastructure.Repositories.Interfaces;
 using Identity.Sdk.Lib.Extensions;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Identity.Infrastructure.Repositories
 {
@@ -21,6 +22,15 @@ namespace Identity.Infrastructure.Repositories
             this.dbContext = dbContext;
             this.userManager = userManager;
         }
+        public async Task Add(User user, string password)
+        {
+            await userManager.AddPasswordAsync(user, password);
+            dbContext.Users.Add(user);
+        }
+        //public async Task<User> Search(string email)
+        //{
+        //    return await dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
+        //}
 
         public Task<bool> CheckHaveRolAsync(User user, string rol)
         {

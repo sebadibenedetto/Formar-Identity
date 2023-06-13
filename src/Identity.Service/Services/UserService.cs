@@ -2,13 +2,39 @@
 using Identity.Dto.Request.Query;
 using Identity.Domain.Services.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Identity.Dto.Request.Command;
+using Identity.Entities;
+using Microsoft.EntityFrameworkCore;
+using Identity.Infrastructure.Repositories;
+using Identity.Infrastructure.Repositories.Interfaces;
 
 namespace Identity.Domain.Service
 {
     public class UserService : IUserService
     {
         private readonly ILoginBuilderDirectorService loginBuilderDirectorService;
+        private readonly IUserRepository userRepository;
 
+        public async Task AddUser(InsertUserCommand insertUserCommand)
+        {
+            var user = new User();
+            user.Email = insertUserCommand.Email;
+            user.Name = insertUserCommand.Name;
+            user.LastName = insertUserCommand.LastName;
+
+            userRepository.Add(user);
+        }
+        //public async Task<bool> SearchUserForEmail(InsertUserCommand insertUserCommand)
+        //{
+        //    var email = insertUserCommand.Email;
+        //    var resp = await userRepository.Search(email);
+        //    if(resp == null)
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+            
+        //}
         public UserService(ILoginBuilderDirectorService loginBuilderDirectorService)
         {
             this.loginBuilderDirectorService = loginBuilderDirectorService;
