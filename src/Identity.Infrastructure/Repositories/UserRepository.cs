@@ -22,15 +22,12 @@ namespace Identity.Infrastructure.Repositories
             this.dbContext = dbContext;
             this.userManager = userManager;
         }
-        public async Task Add(User user, string password)
+        public async Task Add(User user)
         {
-            await userManager.AddPasswordAsync(user, password);
-            dbContext.Users.Add(user);
+            //await userManager.AddPasswordAsync(user, password);
+            var datos = dbContext.Users.Add(user);
+            //dbContext.SaveChanges();
         }
-        //public async Task<User> Search(string email)
-        //{
-        //    return await dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
-        //}
 
         public Task<bool> CheckHaveRolAsync(User user, string rol)
         {

@@ -17,7 +17,7 @@ namespace Identity.Api.Controllers
         {
         }
 
-        [Authorize(Roles = Roles.Admin)]
+        [AllowAnonymous]
         [HttpPost("impersonate")]
         public async Task<IActionResult> ImpersonateAsync([FromBody] ImpersonateUserQuery impersonateQuery)
         => Ok(await Mediator.Send(impersonateQuery));

@@ -24,7 +24,7 @@ namespace Identity.Domain.EventHandlers.User
         public async Task<Unit> Handle(InsertUserCommand request, CancellationToken cancellationToken)
         {
             //userService.SearchUserForEmail(request);
-            userService.AddUser(request);
+            //userService.AddUser(request);
             
 
             return Unit.Value;
