@@ -9,6 +9,6 @@ namespace Identity.Infrastructure.Repositories.Interfaces
         Task<bool> CheckHaveRolAsync(User user, string rol);
         Task<bool> CheckPasswordAsync(User user, string password);
         Task<User> FindAsync(string userName);
-        Task Add(User user);
+        Task Add(User user, string password);
     }
 }

@@ -17,11 +17,10 @@ namespace Identity.Api.Controllers
         {
         }
 
-        [AllowAnonymous]
         [HttpPost("impersonate")]
         public async Task<IActionResult> ImpersonateAsync([FromBody] ImpersonateUserQuery impersonateQuery)
         => Ok(await Mediator.Send(impersonateQuery));
-        [AllowAnonymous]
+
         [HttpPost("register")]
         public async Task<IActionResult> InsertUser([FromBody] InsertUserCommand command)
         => Ok(await Mediator.Send(command));

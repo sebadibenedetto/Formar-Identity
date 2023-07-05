@@ -23,10 +23,9 @@ namespace Identity.Domain.Service
         public async Task AddUser(InsertUserCommand insertUserCommand)
         {
             var user = new User();
-            user.Email = insertUserCommand.Email;
-            user.Name = insertUserCommand.Name;
-            user.LastName = insertUserCommand.LastName;
+            user = insertUserCommand;
 
+            userRepository.Add(user,insertUserCommand.Password);
             
         }
         
