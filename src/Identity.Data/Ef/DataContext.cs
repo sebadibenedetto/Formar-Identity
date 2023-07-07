@@ -13,6 +13,11 @@ namespace Identity.Data.Ef
         {
         }
 
+        public void SaveChangesAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<User>(t =>

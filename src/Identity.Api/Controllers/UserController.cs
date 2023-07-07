@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using Identity.Dto.Request.Query;
 using Identity.Sdk.Lib.Session;
+using Identity.Entities;
+using Identity.Dto.Request.Command;
 
 namespace Identity.Api.Controllers
 {
@@ -15,9 +17,13 @@ namespace Identity.Api.Controllers
         {
         }
 
-        [Authorize(Roles = Roles.Admin)]
         [HttpPost("impersonate")]
         public async Task<IActionResult> ImpersonateAsync([FromBody] ImpersonateUserQuery impersonateQuery)
-            => Ok(await Mediator.Send(impersonateQuery));
+        => Ok(await Mediator.Send(impersonateQuery));
+
+        [HttpPost("register")]
+        public async Task<IActionResult> InsertUser([FromBody] InsertUserCommand command)
+        => Ok(await Mediator.Send(command));
+        
     }
 }

@@ -8,5 +8,6 @@ namespace Identity.Dto.Request.Query
     public class ImpersonateUserQuery : IRequest<JwtResponse>
     {
         public string UserName { get; set; }
+
     }
 }

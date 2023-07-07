@@ -5,6 +5,7 @@ using Identity.Data.Ef;
 using Identity.Entities;
 using Identity.Infrastructure.Repositories.Interfaces;
 using Identity.Sdk.Lib.Extensions;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Identity.Infrastructure.Repositories
 {
@@ -20,6 +21,13 @@ namespace Identity.Infrastructure.Repositories
 
             this.dbContext = dbContext;
             this.userManager = userManager;
+        }
+        public async Task Add(User user, string password)
+        {
+            await userManager.AddPasswordAsync(user, password);
+            user.PasswordHash = userManager.PasswordHasher.HashPassword(user,password);
+            dbContext.Users.Add(user);
+            dbContext.SaveChanges();
         }
 
         public Task<bool> CheckHaveRolAsync(User user, string rol)
