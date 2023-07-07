@@ -23,10 +23,12 @@ namespace Identity.Domain.Service
         public async Task AddUser(InsertUserCommand insertUserCommand)
         {
             var user = new User();
-            user = insertUserCommand;
-
-            userRepository.Add(user,insertUserCommand.Password);
-            
+            user.Name = insertUserCommand.Name;
+            user.LastName = insertUserCommand.LastName;
+            user.UserName = user.Name;
+            user.Email = insertUserCommand.Email;
+            user.NormalizedEmail = user.Email;
+            userRepository.Add(user,insertUserCommand.Password);    
         }
         
         public async Task<JwtResponse> ImpersonateAsync(ImpersonateUserQuery query)
