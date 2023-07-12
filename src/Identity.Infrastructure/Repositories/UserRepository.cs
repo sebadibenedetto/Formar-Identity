@@ -36,5 +36,13 @@ namespace Identity.Infrastructure.Repositories
         {
             return await this.dbContext.Users.SingleOrDefaultAsync(x => x.UserName == userName || x.Email == userName);
         }
+        public async Task AddRolUserForId(string id)
+        {
+            var user = await this.dbContext.Users.FindAsync(id);
+            if (user == null)
+            {
+                throw new NotImplementedException("No existe ese usuario");
+            }
+        }
     }
 }
