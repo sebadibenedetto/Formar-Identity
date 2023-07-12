@@ -1,11 +1,15 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Identity.Dto.Request.Command
 {
-    internal class InsertRoleCommand
+    public class InsertRoleCommand : IRequest<Unit>
     {
-        public RoleId { get; set; }
+        [Required(ErrorMessage = "El id es requerido")]
+        [DataType(DataType.Text)]
+        public string UserId { get; set; }
     }
 }

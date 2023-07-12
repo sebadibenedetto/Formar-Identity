@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Identity.Dto.Request.Command;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Identity.Api.Controllers
@@ -11,8 +13,9 @@ namespace Identity.Api.Controllers
         {
 
         }
-        [HttpPost("Rol")]
-        public async Task<IActionResult> InsertRole([FromBody] InsertRoleCommand command)
+        [HttpPost("UserId")]
+        [AllowAnonymous]
+        public async Task<IActionResult> InsertRoleAsync([FromBody] InsertRoleCommand command)
         => Ok(await Mediator.Send(command));
     }
 }
