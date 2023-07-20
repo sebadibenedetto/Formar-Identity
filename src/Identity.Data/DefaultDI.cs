@@ -17,7 +17,7 @@ namespace Identity.Data
                             .AddInterceptors(new ContextInterceptor(new HttpContextAccessor()))
                             .UseOpenIddict()
                             .UseSqlServer(configuration.GetConnectionString("DataContext")),
-                                          ServiceLifetime.Transient);
+                                          ServiceLifetime.Scoped);
 
             return services;
         }

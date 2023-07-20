@@ -9,6 +9,7 @@ namespace Identity.Infrastructure
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRolRepository, RolRepository>();
             return services;
         }
     }
