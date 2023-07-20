@@ -8,6 +8,6 @@ namespace Identity.Domain.Service
     {
         Task<JwtResponse> ImpersonateAsync(ImpersonateUserQuery request);
         Task<JwtResponse> LoginAsync(UserCredentialsQuery query);
-        Task AddRolUser(InsertRoleCommand insertRoleCommand);
+        Task AddRolUser(string userId);
     }
 }

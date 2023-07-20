@@ -10,16 +10,25 @@ namespace Identity.Domain.Service
     public class UserService : IUserService
     {
         private readonly ILoginBuilderDirectorService loginBuilderDirectorService;
-        private readonly IUserRepository userRepository;
+        private readonly IRolRepository rolRepository;
 
-        public UserService(ILoginBuilderDirectorService loginBuilderDirectorService, IUserRepository userRepository)
+        public UserService(ILoginBuilderDirectorService loginBuilderDirectorService, IRolRepository rolRepository)
         {
             this.loginBuilderDirectorService = loginBuilderDirectorService;
-            this.userRepository = userRepository;
+            this.rolRepository = rolRepository;
         }
-        public async Task AddRolUser(InsertRoleCommand insertRoleCommand)
+        public async Task AddRolUser(string userId)
         {
-            userRepository.AddRolUserForId(insertRoleCommand.UserId);
+            var user = await rolRepository.GetUserByIdAsync(userId);
+            if (user == null) {
+                throw new NotImplementedException("El usuario no existe");
+            }
+            var currentUserRole = await rolRepository.ValidateAccessAplicationUserRole(userId);
+            if (currentUserRole != null)
+            {
+                throw new NotImplementedException("este usuario ya tiene un rol asignado");
+            }
+            await rolRepository.AddRolUserForId(user.Id);
         }
 
         public async Task<JwtResponse> ImpersonateAsync(ImpersonateUserQuery query)

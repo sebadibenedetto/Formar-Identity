@@ -13,7 +13,7 @@ namespace Identity.Api.Controllers
         {
 
         }
-        [HttpPost("UserId")]
+        [HttpPost("AddAccessAplicationRole")]
         [AllowAnonymous]
         public async Task<IActionResult> InsertRoleAsync([FromBody] InsertRoleCommand command)
         => Ok(await Mediator.Send(command));

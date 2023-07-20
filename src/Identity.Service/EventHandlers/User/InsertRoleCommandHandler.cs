@@ -21,7 +21,7 @@ namespace Identity.Domain.EventHandlers.User
         }
         public async Task<Unit> Handle(InsertRoleCommand request, CancellationToken cancellationToken)
         {
-            userService.AddRolUser(request);
+            await userService.AddRolUser(request.UserId);
             return Unit.Value;
         }
     }
